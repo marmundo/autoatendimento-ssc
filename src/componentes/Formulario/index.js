@@ -7,14 +7,12 @@ import CampoTexto from "../CampoTexto";
 import './Formulario.css';
 
 const Formulario = (props) => {
-  const [matricula, setMatricula] = useState('1725032');
-  const [senha, setSenha] = useState('Mdm*ifrn');
-  const [authToken, setAuthToken] = useState('')
+  const [matricula, setMatricula] = useState('');
+  const [senha, setSenha] = useState('');
 
   const limparCampos = () => {
     setMatricula('')
     setSenha('')
-    setAuthToken('')
   }
 
   let usuario = {
@@ -44,7 +42,6 @@ const Formulario = (props) => {
       console.log("Login realizado com sucesso")
       const resposta = await response.json()
       const token = resposta.access
-      setAuthToken(token)
       usuario = { matricula, senha, token }
       return true;
     }
