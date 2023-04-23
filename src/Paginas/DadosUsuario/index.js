@@ -3,20 +3,34 @@ import { useNavigate } from 'react-router-dom';
 import '../../css/geral.css';
 import './DadosUsuario.css';
 export default function DadosUsuario({ usuario }) {
+
   const navegar = useNavigate();
 
+
   function navegarPara(path) {
+    console.log(path)
     navegar(path)
   }
 
   return (
     <section className='container'>
-      <div className='dados-usuario'>
-        <h1 > Matrícula</h1>
-        <h2>{usuario.matricula}</h2>
-        <h1>Senha</h1>
-        <h2>{usuario.senha}</h2>
-        <Botao onClick={navegarPara('/leituraCartao')}>
+      <div >
+        <h1>Confirme Seus Dados</h1>
+        <img src={usuario.foto} alt='foto usuario' />
+        <div className='label'>
+          <p className='bold'> Matrícula</p>
+          <p>{usuario.matricula}</p>
+        </div>
+        <div className='label'>
+          <p className='bold'>Nome</p>
+          <p>{usuario.nome}</p>
+        </div>
+        <div className='label'>
+          <p className='bold'>E-mail</p>
+          <p>{usuario.email}</p>
+        </div>
+
+        <Botao onClick={() => navegarPara('/leituraCartao')}>
           Confirmar
         </Botao>
       </div>

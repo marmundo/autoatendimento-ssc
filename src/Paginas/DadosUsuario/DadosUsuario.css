@@ -1,0 +1,12 @@
+.label {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  /* justify-content: center; */
+  gap: 10px;
+  margin: 1%;
+}
+.label .bold {
+  font-size: large;
+  font-weight: bold;
+}

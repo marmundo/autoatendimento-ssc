@@ -20,7 +20,7 @@ function App() {
             subtitulo={'Utilize sua matrícula e senha SUAP'}
             aoUsuarioCadastrado={usuario => salvarUsuario(usuario)} />} />
         <Route path="/confereDadosUsuario" element={<DadosUsuario usuario={usuario} />} />
-        <Route path="/leitura-cartao" element={<LeituraCartao />} />
+        <Route path="/leituraCartao" element={<LeituraCartao />} />
         <Route path="/fim" element={<Fim />} />
       </Routes>
     </BrowserRouter>

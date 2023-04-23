@@ -8,22 +8,85 @@ import './Formulario.css';
 
 const Formulario = (props) => {
   const [matricula, setMatricula] = useState('1725032');
-  const [senha, setSenha] = useState('1725032');
+  const [senha, setSenha] = useState('Mdm*ifrn');
+  const [authToken, setAuthToken] = useState('')
 
   const limparCampos = () => {
     setMatricula('')
     setSenha('')
+    setAuthToken('')
   }
 
-  const navegar = useNavigate();
-  const aoProximo = (evento) => {
-    evento.preventDefault()
-    let usuario = { matricula, senha }
+  let usuario = {
+    matricula: '',
+    token: '',
+    nome: '',
+    email: '',
+    foto: ''
+  }
 
-    props.aoUsuarioCadastrado(usuario)
+  async function loginSUAP() {
+    let autenticacaoURL = "https://suap.ifrn.edu.br/api/v2/autenticacao/token/"
+    let dadosjson = JSON.stringify({ username: matricula, password: senha });
+
+    const response = await fetch(autenticacaoURL, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: dadosjson,
+    })
+    if (!response.ok) {
+      const resposta = await response.json()
+      console.log(resposta)
+      return false;
+    } else {
+      console.log("Login realizado com sucesso")
+      const resposta = await response.json()
+      const token = resposta.access
+      setAuthToken(token)
+      usuario = { matricula, senha, token }
+      return true;
+    }
+  }
+
+  async function getUserInformation() {
+
+    let headersList = {
+      "Accept": "*/*",
+      'Authorization': `Bearer ${usuario.token}`
+    }
+
+    let response = await fetch("https://suap.ifrn.edu.br/api/v2/minhas-informacoes/meus-dados/", {
+      method: "GET",
+      headers: headersList
+    });
+
+    if (!response.ok) {
+      const resposta = await response.json()
+      console.log(resposta)
+    } else {
+
+      const resposta = await response.json()
+      console.log(resposta)
+      usuario.nome = resposta.nome_usual
+      usuario.email = resposta.email
+      usuario.foto = 'https://suap.ifrn.edu.br' + resposta.url_foto_150x200
+      return usuario
+    }
+
+  }
+  const navegar = useNavigate();
+
+  async function aoProximo(evento) {
+    evento.preventDefault()
+    const resposta = await loginSUAP()
+    if (resposta) {
+      const usuario = await getUserInformation()
+      props.aoUsuarioCadastrado(usuario)
+    }
     limparCampos()
     navegar("/confereDadosUsuario")
-
   }
   return (
     <section className="container" onSubmit={aoProximo}>
@@ -32,7 +95,7 @@ const Formulario = (props) => {
         <h2> {props.subtitulo}</h2>
 
         <CampoTexto label="Matricula - SUAP" valor={matricula} aoAlterado={matricula => { setMatricula(matricula) }} />
-        <CampoTexto label="Senha - SUAP" valor={senha} aoAlterado={senha => { setSenha(senha) }} />
+        <CampoTexto type="password" label="Senha - SUAP" valor={senha} aoAlterado={senha => { setSenha(senha) }} />
 
         <Botao>
           Próximo
