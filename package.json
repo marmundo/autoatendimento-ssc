@@ -1,6 +1,5 @@
 {
   "name": "autoatendimento-ssc",
-  "homepage": "https://geatic.github.io/autoatendimento-ssc",
   "version": "0.1.0",
   "private": false,
   "dependencies": {
@@ -19,9 +18,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -m main -d build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
