@@ -8,3 +8,6 @@
   font-weight: 200;
   color: white;
 }
+.botao:disabled {
+  background-color: #4286f485;
+}
