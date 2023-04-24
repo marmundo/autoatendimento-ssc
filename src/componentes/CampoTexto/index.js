@@ -7,8 +7,16 @@ const CampoTexto = (props) => {
   return (
     <div className="campo-texto">
       <label>{props.label}</label>
-      <input type={props.type} value={props.valor} onChange={aoDigitado} required={props.obrigatorio} placeholder={props.placeholder} autoFocus={props.autoFocus ? 'autoFocus' : ''}
-        onKeyUp={props.onKeyUp} />
+      <input
+        type={props.type}
+        value={props.valor}
+        onChange={aoDigitado}
+        required={props.required}
+        placeholder={props.placeholder}
+        autoFocus={props.autoFocus ? 'autoFocus' : ''}
+        onKeyUp={props.onKeyUp}
+        pattern={props.pattern}
+      />
     </div>
   )
 }

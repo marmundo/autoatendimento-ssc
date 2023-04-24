@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
+import { validMatricula } from "utils/Regex";
 import '../../css/geral.css';
 import Botao from "../Botao";
 import CampoTexto from "../CampoTexto";
@@ -9,6 +10,7 @@ import './Formulario.css';
 const Formulario = (props) => {
   const [matricula, setMatricula] = useState('');
   const [senha, setSenha] = useState('');
+  const [matriculaErr, setMatriculaErr] = useState(false)
 
   const limparCampos = () => {
     setMatricula('')
@@ -35,7 +37,7 @@ const Formulario = (props) => {
       body: dadosjson,
     })
     if (!response.ok) {
-      const resposta = await response.json()
+      // const resposta = await response.json()
       return false;
     } else {
       console.log("Login realizado com sucesso")
@@ -87,19 +89,32 @@ const Formulario = (props) => {
       navegar("/erro")
     }
   }
+
+  function validarMatricula() {
+    !validMatricula.test(matricula) ? setMatriculaErr(true) : setMatriculaErr(false)
+  }
   return (
     <section className="container" onSubmit={aoProximo}>
       <form>
         <h1> {props.titulo}</h1>
         <h2> {props.subtitulo}</h2>
 
-        <CampoTexto label="Matricula - SUAP" valor={matricula} aoAlterado={matricula => { setMatricula(matricula) }} />
-        <CampoTexto type="password" label="Senha - SUAP" valor={senha} aoAlterado={senha => { setSenha(senha) }} />
+        <CampoTexto label="Matricula - SUAP" type="number" valor={matricula}
+          aoAlterado={
+            matricula => {
+              setMatricula(matricula); validarMatricula()
+            }
+          } required />
+        <CampoTexto type="password" label="Senha - SUAP" valor={senha} onKeyUp={(e) => {
+          if (e.key === "Enter") {
+            aoProximo();
+          }
+        }} aoAlterado={senha => { setSenha(senha) }} required />
 
         <Botao>
           Próximo
         </Botao>
-
+        {matriculaErr && <p>Sua matrícula é inválida</p>}
       </form>
     </section>
   )
