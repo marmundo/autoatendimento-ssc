@@ -15,7 +15,6 @@ export default function DadosUsuario({ usuario }) {
   )
   const handleKeyUp = useCallback(
     (e) => {
-      console.log(e.key)
       if (e.key === "Enter") navegarPara('/leituraCartao')
     },
     [navegarPara]

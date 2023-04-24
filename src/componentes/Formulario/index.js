@@ -101,7 +101,7 @@ const Formulario = (props) => {
           } required />
         <CampoTexto type="password" label="Senha - SUAP" valor={senha} onKeyUp={(e) => {
           if (e.key === "Enter" && !matriculaErr) {
-            aoProximo();
+            aoProximo(e);
           }
         }} aoAlterado={senha => { setSenha(senha) }} required />
 
