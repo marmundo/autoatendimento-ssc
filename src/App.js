@@ -1,6 +1,6 @@
 import DadosUsuario from 'Paginas/DadosUsuario';
-import Fim from 'Paginas/Fim';
 import LeituraCartao from 'Paginas/LeituraCartao';
+import Fim from 'Paginas/PaginaMensagem';
 import Formulario from 'componentes/Formulario';
 import { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -21,7 +21,7 @@ function App() {
             aoUsuarioCadastrado={usuario => salvarUsuario(usuario)} />} />
         <Route path="/confereDadosUsuario" element={<DadosUsuario usuario={usuario} />} />
         <Route path="/leituraCartao" element={<LeituraCartao />} />
-        <Route path="/fim" element={<Fim />} />
+        <Route path="/fim" element={<Fim titulo="Obrigado!!!" subtitulo="Seu Cartão foi cadastro com sucesso!" />} />
       </Routes>
     </BrowserRouter>
   );

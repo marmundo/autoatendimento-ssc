@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Fim.css'
-export default function Fim() {
+export default function Fim({ titulo, subtitulo }) {
   const navigate = useNavigate()
   useEffect(() => {
     setTimeout(() => {
@@ -13,10 +13,10 @@ export default function Fim() {
     <section className="container centro-tela">
       <div className="centro-tela">
         <h1>
-          Obrigado!!!!
+          {titulo}
         </h1>
         <h2>
-          Seu Cartão foi cadastro com sucesso!
+          {subtitulo}
         </h2>
       </div>
     </section>
