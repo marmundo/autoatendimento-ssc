@@ -8,8 +8,6 @@ async function post(url, dadosjson) {
     body: dadosjson,
   })
   if (!response.ok) {
-    const resposta = await response.json()
-    console.log(resposta)
     return false;
   } else {
     console.log("post realizado com sucesso")

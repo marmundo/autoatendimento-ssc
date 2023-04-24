@@ -1,4 +1,5 @@
 import Botao from 'componentes/Botao';
+import { useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../css/geral.css';
 import './DadosUsuario.css';
@@ -7,9 +8,25 @@ export default function DadosUsuario({ usuario }) {
   const navegar = useNavigate();
 
 
-  function navegarPara(path) {
-    navegar(path)
-  }
+  const navegarPara = useCallback(
+    (path) => {
+      navegar(path)
+    }, [navegar]
+  )
+  const handleKeyUp = useCallback(
+    (e) => {
+      console.log(e.key)
+      if (e.key === "Enter") navegarPara('/leituraCartao')
+    },
+    [navegarPara]
+  );
+
+  useEffect(() => {
+    document.addEventListener("keyup", handleKeyUp);
+    return () => {
+      document.removeEventListener("keyup", handleKeyUp);
+    };
+  }, [handleKeyUp]);
 
   return (
     <section className='container'>
