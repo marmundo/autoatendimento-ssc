@@ -8,7 +8,6 @@ export default function DadosUsuario({ usuario }) {
 
 
   function navegarPara(path) {
-    console.log(path)
     navegar(path)
   }
 

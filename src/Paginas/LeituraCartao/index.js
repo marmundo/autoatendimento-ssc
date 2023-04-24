@@ -11,7 +11,6 @@ export default function LeituraCartao() {
   const navegar = useNavigate()
 
   function validaCartao() {
-    console.log('00' + cartao)
     if (!validCartaoNFC.test('00' + cartao)) {
       setCartaoErr(true)
       return false

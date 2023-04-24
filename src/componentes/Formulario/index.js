@@ -37,7 +37,6 @@ const Formulario = (props) => {
       body: dadosjson,
     })
     if (!response.ok) {
-      // const resposta = await response.json()
       return false;
     } else {
       console.log("Login realizado com sucesso")
@@ -62,11 +61,8 @@ const Formulario = (props) => {
 
     if (!response.ok) {
       const resposta = await response.json()
-      console.log(resposta)
     } else {
-
       const resposta = await response.json()
-      console.log(resposta)
       usuario.nome = resposta.nome_usual
       usuario.email = resposta.email
       usuario.foto = 'https://suap.ifrn.edu.br' + resposta.url_foto_150x200
@@ -79,7 +75,6 @@ const Formulario = (props) => {
   async function aoProximo(evento) {
     evento.preventDefault()
     const resposta = await loginSUAP()
-    console.log(resposta)
     if (resposta) {
       const usuario = await getUserInformation()
       props.aoUsuarioCadastrado(usuario)
@@ -106,14 +101,16 @@ const Formulario = (props) => {
             }
           } required />
         <CampoTexto type="password" label="Senha - SUAP" valor={senha} onKeyUp={(e) => {
-          if (e.key === "Enter") {
+          if (e.key === "Enter" && !matriculaErr) {
             aoProximo();
           }
         }} aoAlterado={senha => { setSenha(senha) }} required />
 
-        <Botao>
+        <Botao disabled={matriculaErr}>
           Próximo
         </Botao>
+
+
         {matriculaErr && <p>Sua matrícula é inválida</p>}
       </form>
     </section>
