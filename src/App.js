@@ -1,6 +1,6 @@
 import DadosUsuario from 'Paginas/DadosUsuario';
 import LeituraCartao from 'Paginas/LeituraCartao';
-import Fim from 'Paginas/PaginaMensagem';
+import PaginaMensagem from 'Paginas/PaginaMensagem';
 import Formulario from 'componentes/Formulario';
 import { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -21,7 +21,8 @@ function App() {
             aoUsuarioCadastrado={usuario => salvarUsuario(usuario)} />} />
         <Route path="/confereDadosUsuario" element={<DadosUsuario usuario={usuario} />} />
         <Route path="/leituraCartao" element={<LeituraCartao />} />
-        <Route path="/fim" element={<Fim titulo="Obrigado!!!" subtitulo="Seu Cartão foi cadastro com sucesso!" />} />
+        <Route path="/fim" element={<PaginaMensagem titulo="Obrigado!!!" subtitulo="Seu Cartão foi cadastro com sucesso!" />} />
+        <Route path="/erro" element={<PaginaMensagem titulo="ERRO!!!" subtitulo="Seu usuário ou senha não foram digitados corretamente" />} />
       </Routes>
     </BrowserRouter>
   );

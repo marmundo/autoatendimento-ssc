@@ -36,7 +36,6 @@ const Formulario = (props) => {
     })
     if (!response.ok) {
       const resposta = await response.json()
-      console.log(resposta)
       return false;
     } else {
       console.log("Login realizado com sucesso")
@@ -78,12 +77,15 @@ const Formulario = (props) => {
   async function aoProximo(evento) {
     evento.preventDefault()
     const resposta = await loginSUAP()
+    console.log(resposta)
     if (resposta) {
       const usuario = await getUserInformation()
       props.aoUsuarioCadastrado(usuario)
+      limparCampos()
+      navegar("/confereDadosUsuario")
+    } else {
+      navegar("/erro")
     }
-    limparCampos()
-    navegar("/confereDadosUsuario")
   }
   return (
     <section className="container" onSubmit={aoProximo}>

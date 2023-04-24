@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import './Fim.css'
+import './PaginaMensagem.css'
 export default function Fim({ titulo, subtitulo }) {
   const navigate = useNavigate()
   useEffect(() => {
