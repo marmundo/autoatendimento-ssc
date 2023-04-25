@@ -60,9 +60,10 @@ const Formulario = (props) => {
 
     if (!response.ok) {
       const resposta = await response.json()
+      console.log("Erro autenticação > ", resposta)
     } else {
       const resposta = await response.json()
-      usuario.nome = resposta.nome_usual
+      usuario.nome = resposta.vinculo.nome
       usuario.email = resposta.email
       usuario.foto = 'https://suap.ifrn.edu.br' + resposta.url_foto_150x200
       return usuario
