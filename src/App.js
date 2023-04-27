@@ -16,13 +16,12 @@ function App() {
       <Routes>
         <Route path="/" element={
           <Formulario
-            titulo={'Registro para Catraca do IFRN-SGA'}
+            titulo={'Cadastro de Acesso ao IFRN-SGA'}
             subtitulo={'Utilize sua matrícula e senha SUAP'}
             aoUsuarioCadastrado={usuario => salvarUsuario(usuario)} />} />
         <Route path="/confereDadosUsuario" element={<DadosUsuario usuario={usuario} />} />
         <Route path="/leituraCartao" element={<LeituraCartao usuario={usuario} />} />
-        <Route path="/fim" element={<PaginaMensagem titulo="Obrigado!!!" subtitulo="Seu Cartão foi cadastro com sucesso!" />} />
-        <Route path="/erro" element={<PaginaMensagem titulo="ERRO!!!" subtitulo="Seu usuário ou senha não foram digitados corretamente" />} />
+        <Route path="/mensagem" element={<PaginaMensagem />} />
       </Routes>
     </BrowserRouter>
   );
