@@ -9,10 +9,12 @@ async function post(url, dadosjson, nocors) {
   if (nocors) {
     headerOptions.headers.mode = 'no-cors'
   }
-  console.log(headerOptions)
   const response = await fetch(url, headerOptions)
-  const resposta = response.json()
+  const resposta = await response.json()
   if (!response.ok) {
+    if (resposta.detail) {
+      return { 'status': false, 'msg': resposta.detail[0].msg };
+    }
     return { 'status': false, 'msg': resposta };
   } else {
     console.log("post realizado com sucesso")
@@ -20,5 +22,5 @@ async function post(url, dadosjson, nocors) {
   }
 }
 
-export { post }
+export { post };
 
