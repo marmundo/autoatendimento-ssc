@@ -81,7 +81,11 @@ const Formulario = (props) => {
       limparCampos()
       navegar("/confereDadosUsuario")
     } else {
-      navegar("/erro")
+
+      const titulo = "ERRO!!!";
+      const subtitulo = "Seu usuário ou senha não foram digitados corretamente";
+
+      navegar(`/mensagem?titulo=${titulo}&subtitulo=${subtitulo}`)
     }
   }
 
