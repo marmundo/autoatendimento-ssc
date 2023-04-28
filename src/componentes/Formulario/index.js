@@ -1,3 +1,4 @@
+import CheckBox from "componentes/CheckBox";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { validMatricula } from "utils/Regex";
@@ -10,6 +11,10 @@ const Formulario = (props) => {
   const [matricula, setMatricula] = useState('');
   const [senha, setSenha] = useState('');
   const [matriculaErr, setMatriculaErr] = useState(false)
+  const [lgpd, setLgpd] = useState(false)
+
+  const lgpdLabel = "Eu concordo que minhas informações aqui apresentadas sejam armazenadas por esse sistema de acordo com a legislação brasileira"
+
 
   const limparCampos = () => {
     setMatricula('')
@@ -98,7 +103,7 @@ const Formulario = (props) => {
         <h1> {props.titulo}</h1>
         <h2> {props.subtitulo}</h2>
 
-        <CampoTexto label="Matricula - SUAP" type="number" valor={matricula}
+        <CampoTexto maxLength="14" label="Matricula - SUAP" type="number" valor={matricula}
           aoAlterado={
             matricula => {
               setMatricula(matricula); validarMatricula()
@@ -110,7 +115,8 @@ const Formulario = (props) => {
           }
         }} aoAlterado={senha => { setSenha(senha) }} required />
 
-        <Botao disabled={matriculaErr}>
+        <CheckBox label={lgpdLabel} checked={lgpd} onChange={() => setLgpd(!lgpd)} />
+        <Botao disabled={matriculaErr || !lgpd}>
           Próximo
         </Botao>
         {matriculaErr && <p>Sua matrícula é inválida</p>}
