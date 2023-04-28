@@ -1,12 +1,24 @@
-.label {
+#matricula {
+  flex-direction: row;
+  padding: 0px;
+}
+.container .label {
   display: flex;
   flex-direction: row;
   align-items: baseline;
-  /* justify-content: center; */
   gap: 10px;
-  margin: 1%;
+  font-size: 20px;
+  margin: -20px 0px;
 }
-.label .bold {
+.container .label .bold {
   font-size: large;
   font-weight: bold;
+}
+
+.container .form {
+  gap: 5px;
+}
+
+.form .dados-pessoais {
+  margin: 5% 0px;
 }

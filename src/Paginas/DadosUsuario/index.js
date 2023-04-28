@@ -29,20 +29,24 @@ export default function DadosUsuario({ usuario }) {
 
   return (
     <section className='container'>
-      <div >
-        <h1>Confirme Seus Dados</h1>
-        <img src={usuario.foto} alt='foto usuario' />
-        <div className='label'>
-          <p className='bold'> Matrícula</p>
-          <p>{usuario.matricula}</p>
+      <div className='form'>
+        <h1 id="titulo">Confirme Seus Dados</h1>
+        <div className='foto-aluno'>
+          <img src={usuario.foto} alt='foto usuario' />
         </div>
-        <div className='label'>
-          <p className='bold'>Nome</p>
-          <p>{usuario.nome}</p>
-        </div>
-        <div className='label'>
-          <p className='bold'>E-mail</p>
-          <p>{usuario.email}</p>
+        <div className='dados-pessoais'>
+          <div className='label' id='matricula'>
+            <p className='bold'> Matrícula</p>
+            <p>{usuario.matricula}</p>
+          </div>
+          <div className='label'>
+            <p className='bold'>Nome</p>
+            <p>{usuario.nome}</p>
+          </div>
+          <div className='label'>
+            <p className='bold'>E-mail</p>
+            <p>{usuario.email}</p>
+          </div>
         </div>
 
         <Botao onClick={() => navegarPara('/leituraCartao')}>

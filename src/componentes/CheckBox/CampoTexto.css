@@ -1,0 +1,10 @@
+.checkbox {
+  margin: 24px 0;
+  max-width: 50%;
+  text-align: justify;
+}
+
+.checkbox label {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
