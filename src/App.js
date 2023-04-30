@@ -4,7 +4,6 @@ import PaginaMensagem from 'Paginas/PaginaMensagem';
 import Formulario from 'componentes/Formulario';
 import { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './App.css';
 function App() {
 
   const [usuario, setUsuario] = useState({})
