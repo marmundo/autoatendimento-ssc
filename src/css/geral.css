@@ -20,3 +20,9 @@
   gap: 8%;
   justify-content: space-around;
 }
+
+.mensagem-erro {
+  color: red;
+  font-size: large;
+  text-decoration: underline;
+}

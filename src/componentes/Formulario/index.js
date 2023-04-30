@@ -109,6 +109,7 @@ const Formulario = (props) => {
               setMatricula(matricula); validarMatricula()
             }
           } required />
+        {matriculaErr && <p className="mensagem-erro">Sua matrícula é inválida</p>}
         <CampoTexto type="password" label="Senha - SUAP" valor={senha} onKeyUp={(e) => {
           if (e.key === "Enter" && !matriculaErr) {
             aoProximo(e);
@@ -119,7 +120,7 @@ const Formulario = (props) => {
         <Botao disabled={matriculaErr || !lgpd}>
           Próximo
         </Botao>
-        {matriculaErr && <p>Sua matrícula é inválida</p>}
+
       </form>
     </section>
   )
