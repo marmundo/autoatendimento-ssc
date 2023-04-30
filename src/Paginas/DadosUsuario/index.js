@@ -48,10 +48,14 @@ export default function DadosUsuario({ usuario }) {
             <p>{usuario.email}</p>
           </div>
         </div>
-
-        <Botao onClick={() => navegarPara('/leituraCartao')}>
-          Confirmar
-        </Botao>
+        <div className='botoes'>
+          <Botao onClick={() => navegarPara('/leituraCartao')}>
+            Confirmar
+          </Botao>
+          <Botao onClick={() => navegarPara('/')}>
+            Cancelar
+          </Botao>
+        </div>
       </div>
     </section>
   )

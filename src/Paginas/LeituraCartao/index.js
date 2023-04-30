@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { validCartaoNFC } from "utils/Regex";
 import { post } from "utils/utils";
+import '../../css/geral.css';
 import './LeituraCartao.css';
 
 export default function LeituraCartao({ usuario }) {
@@ -79,9 +80,15 @@ export default function LeituraCartao({ usuario }) {
               cadastrarUsuario(usuario)
             }
           }} />
-        <Botao id='botao' onClick={() => cadastrarUsuario(usuario)} >
-          Cadastrar
-        </Botao>
+        <div className='botoes'>
+          <Botao id='botao' onClick={() => cadastrarUsuario(usuario)} >
+            Cadastrar
+          </Botao>
+          <Botao onClick={() => navegarPara('/')}>
+            Cancelar
+          </Botao>
+        </div>
+
         {cartaoErr && <div className="mensagem-erro"> <p>Seu cartão é inválido</p> <p>Insira novamente seu cartão!</p></div>}
       </div>
     </section >
