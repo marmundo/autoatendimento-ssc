@@ -15,11 +15,8 @@ export default function LeituraCartao({ usuario }) {
   const url = 'https://10.230.0.46/api/v2/autoatendimento'
 
 
-  function validaCartao() {
-    if (cartao.length === 8) {
-      setCartao('00' + cartao)
-    }
-    if (!validCartaoNFC.test(cartao)) {
+  function validaCartao(cartaoTemp) {
+    if (!validCartaoNFC.test(cartaoTemp)) {
       setCartaoErr(true)
       return false
     }
@@ -40,8 +37,8 @@ export default function LeituraCartao({ usuario }) {
   }
 
   async function cadastrarUsuario(usuario) {
-    let cartao = cadastrarCartao()
-    let payload = montaPayload(usuario, cartao.cartao)
+    let cartaoTemp = salvarCartao()
+    let payload = montaPayload(usuario, cartaoTemp)
     let resposta = await post(url, payload)
     if (resposta.status) {
       const titulo = "Obrigado!!!"
@@ -53,12 +50,14 @@ export default function LeituraCartao({ usuario }) {
     }
   }
 
-  function cadastrarCartao() {
-    if (validaCartao()) {
-      if (cartao.length === 8) {
-        return { cartao: '00' + cartao };
-      }
-      return { cartao: cartao };
+  function salvarCartao() {
+    let cartaoTemp = cartao
+    if (cartao.length === 8) {
+      setCartao('00' + cartao)
+      cartaoTemp = '00' + cartao
+    }
+    if (validaCartao(cartaoTemp)) {
+      return cartaoTemp;
     }
   }
 
