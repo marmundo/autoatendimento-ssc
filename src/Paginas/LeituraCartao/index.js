@@ -57,7 +57,7 @@ export default function LeituraCartao({ usuario }) {
       cartaoTemp = '00' + cartao
     }
     if (validaCartao(cartaoTemp)) {
-      return cartaoTemp;
+      return cartaoTemp.toUpperCase();
     }
   }
 
