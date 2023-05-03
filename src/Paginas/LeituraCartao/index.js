@@ -10,6 +10,7 @@ import './LeituraCartao.css';
 export default function LeituraCartao({ usuario }) {
   const [cartao, setCartao] = useState('')
   const [cartaoErr, setCartaoErr] = useState(false)
+  const [bool, setBool] = useState(true);
   const navegar = useNavigate()
 
   const url = 'https://10.230.0.46/api/v2/autoatendimento'
@@ -37,9 +38,11 @@ export default function LeituraCartao({ usuario }) {
   }
 
   async function cadastrarUsuario(usuario) {
+
     let cartaoTemp = salvarCartao()
     let payload = montaPayload(usuario, cartaoTemp)
     let resposta = await post(url, payload)
+    setBool(resposta.length > 0)
     if (resposta.status) {
       const titulo = "Obrigado!!!"
       const subtitulo = "Seu cartão foi cadastrado com sucesso!"
@@ -78,9 +81,9 @@ export default function LeituraCartao({ usuario }) {
             if (e.key === "Enter") {
               cadastrarUsuario(usuario)
             }
-          }} />
+          }} maxlength='10' />
         <div className='botoes'>
-          <Botao id='botao' onClick={() => cadastrarUsuario(usuario)} >
+          <Botao id='botao' disable={bool} onClick={() => cadastrarUsuario(usuario)} >
             Cadastrar
           </Botao>
           <Botao onClick={() => navegarPara('/')}>

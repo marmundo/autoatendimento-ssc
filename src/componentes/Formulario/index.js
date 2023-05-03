@@ -7,11 +7,13 @@ import Botao from "../Botao";
 import CampoTexto from "../CampoTexto";
 import './Formulario.css';
 
+
 const Formulario = (props) => {
   const [matricula, setMatricula] = useState('');
   const [senha, setSenha] = useState('');
   const [matriculaErr, setMatriculaErr] = useState(false)
   const [lgpd, setLgpd] = useState(false)
+  const [bool, setBool] = useState(true);
 
   const lgpdLabel = "Eu concordo que minhas informações aqui apresentadas sejam armazenadas por esse sistema de acordo com a legislação brasileira"
 
@@ -80,6 +82,7 @@ const Formulario = (props) => {
   async function aoProximo(evento) {
     evento.preventDefault()
     const resposta = await loginSUAP()
+    setBool(resposta.length > 0)
     if (resposta) {
       const usuario = await getUserInformation()
       props.aoUsuarioCadastrado(usuario)
@@ -103,7 +106,7 @@ const Formulario = (props) => {
         <h1> {props.titulo}</h1>
         <h2> {props.subtitulo}</h2>
 
-        <CampoTexto maxLength="14" label="Matricula - SUAP" type="number" valor={matricula}
+        <CampoTexto maxlength="14" label="Matricula - SUAP" type="number" valor={matricula}
           aoAlterado={
             matricula => {
               setMatricula(matricula); validarMatricula()
@@ -117,7 +120,7 @@ const Formulario = (props) => {
         }} aoAlterado={senha => { setSenha(senha) }} required />
 
         <CheckBox label={lgpdLabel} checked={lgpd} onChange={() => setLgpd(!lgpd)} />
-        <Botao disabled={matriculaErr || !lgpd}>
+        <Botao disabled={(matriculaErr || !lgpd) && bool}>
           Próximo
         </Botao>
 
