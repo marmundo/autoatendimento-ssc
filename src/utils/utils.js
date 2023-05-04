@@ -9,7 +9,8 @@ async function post(url, dadosjson, nocors) {
   if (nocors) {
     headerOptions.headers.mode = 'no-cors'
   }
-  const response = await fetch(url, headerOptions)
+
+  const response = await fetch(url, headerOptions).catch((error) => console.log(error))
   const resposta = await response.json()
   if (!response.ok) {
     if (resposta.detail) {
