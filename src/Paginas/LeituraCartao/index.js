@@ -41,16 +41,26 @@ export default function LeituraCartao({ usuario }) {
 
     let cartaoTemp = salvarCartao()
     let payload = montaPayload(usuario, cartaoTemp)
-    let resposta = await post(url, payload)
-    setBool(resposta.length > 0)
-    if (resposta.status) {
-      const titulo = "Obrigado!!!"
-      const subtitulo = "Seu cartão foi cadastrado com sucesso!"
-      navegarPara(`/mensagem?titulo=${titulo}&subtitulo=${subtitulo}`)
-    } else {
-      const titulo = "ERRO!!!";
-      navegar(`/mensagem?titulo=${titulo}&subtitulo=${resposta.msg}`)
-    }
+    post(url, payload)
+      .then(
+        (resposta) => {
+          setBool(resposta)
+          if (resposta.status) {
+            const titulo = "Obrigado!!!"
+            const subtitulo = "Seu cartão foi cadastrado com sucesso!"
+            navegarPara(`/mensagem?titulo=${titulo}&subtitulo=${subtitulo}`)
+          } else {
+            const titulo = "ERRO!!!";
+            navegar(`/mensagem?titulo=${titulo}&subtitulo=${resposta.msg}`)
+          }
+        }
+      )
+      .catch(
+        (error) => {
+          console.log(error)
+          navegar(`/mensagem?titulo=${"ERRO!!!"}&subtitulo=${"Erro no servidor"}`)
+        }
+      )
   }
 
   function salvarCartao() {
@@ -81,7 +91,7 @@ export default function LeituraCartao({ usuario }) {
             if (e.key === "Enter") {
               cadastrarUsuario(usuario)
             }
-          }} maxlength='10' />
+          }} maxlength='8' />
         <div className='botoes'>
           <Botao id='botao' disable={bool} onClick={() => cadastrarUsuario(usuario)} >
             Cadastrar
