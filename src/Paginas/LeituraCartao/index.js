@@ -3,14 +3,13 @@ import CampoTexto from "componentes/CampoTexto";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { validCartaoNFC } from "utils/Regex";
-import { post } from "utils/utils";
+import { post } from 'utils/utils';
 import '../../css/geral.css';
 import './LeituraCartao.css';
-
 export default function LeituraCartao({ usuario }) {
   const [cartao, setCartao] = useState('')
   const [cartaoErr, setCartaoErr] = useState(false)
-  const [bool, setBool] = useState(true);
+  const [bool, setBool] = useState(false);
   const navegar = useNavigate()
 
   const url = 'https://10.230.0.46/api/v2/autoatendimento'
@@ -37,14 +36,16 @@ export default function LeituraCartao({ usuario }) {
     return JSON.stringify(payload)
   }
 
-  async function cadastrarUsuario(usuario) {
 
+
+  async function cadastrarUsuario(usuario) {
+    setBool(true)
     let cartaoTemp = salvarCartao()
     let payload = montaPayload(usuario, cartaoTemp)
-    post(url, payload)
+    console.log(payload)
+    post(url, payload, true)
       .then(
         (resposta) => {
-          setBool(resposta)
           if (resposta.status) {
             const titulo = "Obrigado!!!"
             const subtitulo = "Seu cartão foi cadastrado com sucesso!"
@@ -93,7 +94,7 @@ export default function LeituraCartao({ usuario }) {
             }
           }} maxlength='8' />
         <div className='botoes'>
-          <Botao id='botao' disable={bool} onClick={() => cadastrarUsuario(usuario)} >
+          <Botao id='botao' disabled={bool} onClick={() => cadastrarUsuario(usuario)} >
             Cadastrar
           </Botao>
           <Botao onClick={() => navegarPara('/')}>
