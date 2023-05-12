@@ -14,7 +14,7 @@ async function post(url, dadosjson, nocors) {
   const resposta = await response.json()
   if (!response.ok) {
     if (resposta.detail) {
-      return { 'status': false, 'msg': resposta.detail[0].msg };
+      return { 'status': false, 'msg': resposta.detail };
     }
     return { 'status': false, 'msg': resposta };
   } else {
