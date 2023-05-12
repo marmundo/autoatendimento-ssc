@@ -13,9 +13,9 @@ const Formulario = (props) => {
   const [senha, setSenha] = useState('');
   const [matriculaErr, setMatriculaErr] = useState(false)
   const [lgpd, setLgpd] = useState(false)
-  const [bool, setBool] = useState(true);
+  const [bool, setBool] = useState(false);
 
-  const lgpdLabel = "Eu concordo que minhas informações aqui apresentadas sejam armazenadas por esse sistema de acordo com a legislação brasileira"
+  const lgpdLabel = "Eu concordo que minhas informações aqui apresentadas sejam armazenadas por esse sistema de acordo com a legislação brasileira."
 
 
   const limparCampos = () => {
@@ -82,7 +82,7 @@ const Formulario = (props) => {
   async function aoProximo(evento) {
     evento.preventDefault()
     const resposta = await loginSUAP()
-    setBool(resposta.length > 0)
+    setBool(true)
     if (resposta) {
       const usuario = await getUserInformation()
       props.aoUsuarioCadastrado(usuario)
@@ -106,21 +106,22 @@ const Formulario = (props) => {
         <h1> {props.titulo}</h1>
         <h2> {props.subtitulo}</h2>
 
-        <CampoTexto maxlength="14" label="Matricula - SUAP" type="number" valor={matricula}
+        <CampoTexto maxlength="14" label="Matrícula - SUAP" type="number" valor={matricula}
           aoAlterado={
             matricula => {
               setMatricula(matricula); validarMatricula()
             }
-          } required />
+
+          } autoFocus required />
         {matriculaErr && <p className="mensagem-erro">Sua matrícula é inválida</p>}
         <CampoTexto type="password" label="Senha - SUAP" valor={senha} onKeyUp={(e) => {
-          if (e.key === "Enter" && !matriculaErr) {
+          if (e.key === "Enter" && (!matriculaErr && lgpd)) {
             aoProximo(e);
           }
         }} aoAlterado={senha => { setSenha(senha) }} required />
 
         <CheckBox label={lgpdLabel} checked={lgpd} onChange={() => setLgpd(!lgpd)} />
-        <Botao disabled={(matriculaErr || !lgpd) && bool}>
+        <Botao disabled={(matriculaErr || !lgpd) || bool}>
           Próximo
         </Botao>
 
