@@ -66,10 +66,8 @@ export default function LeituraCartao({ usuario }) {
 
   function salvarCartao() {
     let cartaoTemp = cartao
-    if (cartao.length === 8) {
-      setCartao('00' + cartao)
-      cartaoTemp = '00' + cartao
-    }
+    setCartao(cartao)
+    cartaoTemp = cartao
     if (validaCartao(cartaoTemp)) {
       return cartaoTemp.toUpperCase();
     }
