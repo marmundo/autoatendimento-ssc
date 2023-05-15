@@ -4,7 +4,7 @@ import 'css/geral.css';
 import { useContext, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { validMatricula } from "utils/Regex";
-import { loginSUAP } from "utils/utils";
+import { getUserSUAPInformation, loginSUAP } from "utils/utils";
 import Botao from "../../componentes/Botao";
 import CampoTexto from "../../componentes/CampoTexto";
 import './FormularioSUAP.css';
@@ -29,27 +29,7 @@ const Formulario = (props) => {
 
 
 
-  async function getUserInformation(tempToken) {
-    let headersList = {
-      "Accept": "*/*",
-      'Authorization': `Bearer ${tempToken}`
-    }
-    let response = await fetch("https://suap.ifrn.edu.br/api/v2/minhas-informacoes/meus-dados/", {
-      method: "GET",
-      headers: headersList
-    });
 
-    if (!response.ok) {
-      const resposta = await response.json()
-      console.log("Erro autenticação > ", resposta)
-    } else {
-      const resposta = await response.json()
-      setNome(resposta.vinculo.nome)
-      setEmail(resposta.email)
-      setFoto('https://suap.ifrn.edu.br' + resposta.url_foto_150x200)
-    }
-
-  }
 
 
   async function aoProximo(evento) {
@@ -59,7 +39,10 @@ const Formulario = (props) => {
     const resposta = await loginSUAP(matricula, senha)
 
     if (resposta.status) {
-      await getUserInformation(resposta.token)
+      let usuario = await getUserSUAPInformation(resposta.token)
+      setNome(usuario.nome)
+      setEmail(usuario.email)
+      setFoto(usuario.foto)
       limparCampos()
       navegar("/confereDadosUsuario")
     } else {
