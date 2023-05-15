@@ -21,10 +21,7 @@ const Formulario = (props) => {
 
   const lgpdLabel = "Eu concordo que minhas informações aqui apresentadas sejam armazenadas por esse sistema de acordo com a legislação brasileira."
 
-  const limparCampos = () => {
-    setMatricula('')
-    setSenha('')
-  }
+
 
   async function aoProximo(evento) {
 
@@ -38,7 +35,6 @@ const Formulario = (props) => {
       setNome(usuario.nome)
       setEmail(usuario.email)
       setFoto(usuario.foto)
-      limparCampos()
       navegar("/confereDadosUsuario")
     } else {
 
@@ -73,9 +69,8 @@ const Formulario = (props) => {
             aoAlterado={
               matricula => {
                 setMatricula(matricula); validarMatricula()
-              }
-
-            } autoFocus required />
+              }}
+            autoFocus required />
           {matriculaErr && <p className="mensagem-erro">Sua matrícula é inválida</p>}
           <CampoTexto type="password" label="Senha - SUAP" valor={senha} onKeyUp={(e) => {
             if (e.key === "Enter" && (!matriculaErr && lgpd)) {
