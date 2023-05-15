@@ -14,6 +14,7 @@ const Formulario = (props) => {
   const [matriculaErr, setMatriculaErr] = useState(false)
   const [lgpd, setLgpd] = useState(false)
   const [bool, setBool] = useState(false);
+  const [isCapsLockOn, setIsCapsLockOn] = useState(false)
 
   const lgpdLabel = "Eu concordo que minhas informações aqui apresentadas sejam armazenadas por esse sistema de acordo com a legislação brasileira."
 
@@ -97,6 +98,15 @@ const Formulario = (props) => {
     }
   }
 
+  // This function is triggered on the keyup event
+  const checkCapsLock = (event) => {
+    if (event.getModifierState('CapsLock')) {
+      setIsCapsLockOn(true);
+    } else {
+      setIsCapsLockOn(false);
+    }
+  };
+
   function validarMatricula() {
     !validMatricula.test(matricula) ? setMatriculaErr(true) : setMatriculaErr(false)
   }
@@ -118,7 +128,10 @@ const Formulario = (props) => {
           if (e.key === "Enter" && (!matriculaErr && lgpd)) {
             aoProximo(e);
           }
+          checkCapsLock(e)
         }} aoAlterado={senha => { setSenha(senha) }} required />
+        {/* Avisa ao usuario quando o caps lock está ativo */}
+        {isCapsLockOn && <p className="mensagem-erro">CapsLock está ativo</p>}
 
         <CheckBox label={lgpdLabel} checked={lgpd} onChange={() => setLgpd(!lgpd)} />
         <Botao disabled={(matriculaErr || !lgpd) || bool}>
