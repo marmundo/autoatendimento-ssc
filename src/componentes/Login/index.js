@@ -1,4 +1,4 @@
-import Formulario from "componentes/Formulario";
+import Formulario from "paginas/FormularioSUAP";
 
 export default function Login() {
   return (

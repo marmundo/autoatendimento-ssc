@@ -3,9 +3,9 @@ import 'css/geral.css';
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { validMatricula } from "utils/Regex";
-import Botao from "../Botao";
-import CampoTexto from "../CampoTexto";
-import './Formulario.css';
+import Botao from "../../componentes/Botao";
+import CampoTexto from "../../componentes/CampoTexto";
+import './FormularioSUAP.css';
 
 
 const Formulario = (props) => {

@@ -1,5 +1,5 @@
-import Formulario from 'componentes/Formulario';
 import DadosUsuario from 'paginas/DadosUsuario';
+import Formulario from 'paginas/FormularioSUAP';
 import LeituraCartao from 'paginas/LeituraCartao';
 import PaginaMensagem from 'paginas/PaginaMensagem';
 import { useState } from 'react';
