@@ -7,6 +7,8 @@ import './DadosUsuario.css';
 export default function DadosUsuario() {
   const { foto, matricula, nome, email } = useContext(UsuarioContext);
 
+  console.log(matricula)
+
   const navegar = useNavigate();
 
   const navegarPara = useCallback(
