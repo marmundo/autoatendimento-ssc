@@ -26,12 +26,6 @@ const Formulario = (props) => {
     setSenha('')
   }
 
-
-
-
-
-
-
   async function aoProximo(evento) {
 
     evento.preventDefault()
@@ -40,6 +34,7 @@ const Formulario = (props) => {
 
     if (resposta.status) {
       let usuario = await getUserSUAPInformation(resposta.token)
+      setToken(resposta.token)
       setNome(usuario.nome)
       setEmail(usuario.email)
       setFoto(usuario.foto)
