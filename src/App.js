@@ -1,7 +1,7 @@
-import DadosUsuario from 'Paginas/DadosUsuario';
-import LeituraCartao from 'Paginas/LeituraCartao';
-import PaginaMensagem from 'Paginas/PaginaMensagem';
 import Formulario from 'componentes/Formulario';
+import DadosUsuario from 'paginas/DadosUsuario';
+import LeituraCartao from 'paginas/LeituraCartao';
+import PaginaMensagem from 'paginas/PaginaMensagem';
 import { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 function App() {

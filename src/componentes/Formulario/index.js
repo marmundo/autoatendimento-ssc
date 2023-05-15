@@ -1,8 +1,8 @@
 import CheckBox from "componentes/CheckBox";
+import 'css/geral.css';
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { validMatricula } from "utils/Regex";
-import '../../css/geral.css';
 import Botao from "../Botao";
 import CampoTexto from "../CampoTexto";
 import './Formulario.css';

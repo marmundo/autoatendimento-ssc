@@ -1,5 +1,11 @@
 {
   "compilerOptions": {
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "paths": {
+      "componentes": ["componentes"],
+      "paginas": ["paginas"],
+      "utils": ["utils"],
+      "css": ["css"]
+    }
   }
 }

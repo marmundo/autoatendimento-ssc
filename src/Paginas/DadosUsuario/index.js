@@ -1,7 +1,7 @@
 import Botao from 'componentes/Botao';
+import 'css/geral.css';
 import { useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../../css/geral.css';
 import './DadosUsuario.css';
 export default function DadosUsuario({ usuario }) {
 

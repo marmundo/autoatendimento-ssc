@@ -1,10 +1,10 @@
 import Botao from "componentes/Botao";
 import CampoTexto from "componentes/CampoTexto";
+import 'css/geral.css';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { validCartaoNFC } from "utils/Regex";
 import { post } from 'utils/utils';
-import '../../css/geral.css';
 import './LeituraCartao.css';
 export default function LeituraCartao({ usuario }) {
   const [cartao, setCartao] = useState('')
