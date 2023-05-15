@@ -1,20 +1,21 @@
+import { UsuarioContext } from "common/context/Usuario";
 import Botao from "componentes/Botao";
 import CampoTexto from "componentes/CampoTexto";
 import 'css/geral.css';
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { validCartaoNFC } from "utils/Regex";
-import { post } from 'utils/utils';
+import { post } from "utils/utils";
 import './LeituraCartao.css';
-export default function LeituraCartao({ usuario }) {
-  const [cartao, setCartao] = useState('')
+export default function LeituraCartao() {
+
   const [cartaoErr, setCartaoErr] = useState(false)
   const [bool, setBool] = useState(false);
   const navegar = useNavigate()
 
   const url = 'https://10.230.0.46/api/v2/autoatendimento'
 
-
+  const { matricula, nome, cartao, setCartao, token } = useContext(UsuarioContext);
   function validaCartao(cartaoTemp) {
     if (!validCartaoNFC.test(cartaoTemp)) {
       setCartaoErr(true)
@@ -26,22 +27,22 @@ export default function LeituraCartao({ usuario }) {
     }
   }
 
-  function montaPayload(usuario, cartao) {
+  function montaPayload(cartao) {
     let payload = {}
-    payload.nome = usuario.nome
-    payload.registro = usuario.matricula
+    payload.nome = nome
+    payload.registro = matricula
     payload.tag = cartao
-    payload.token = usuario.token
+    payload.token = token
     payload.vinculo = true
     return JSON.stringify(payload)
   }
 
 
 
-  async function cadastrarUsuario(usuario) {
+  async function cadastrarUsuario() {
     setBool(true)
     let cartaoTemp = salvarCartao()
-    let payload = montaPayload(usuario, cartaoTemp)
+    let payload = montaPayload(cartaoTemp)
     console.log(payload)
     post(url, payload, true)
       .then(
@@ -65,11 +66,11 @@ export default function LeituraCartao({ usuario }) {
   }
 
   function salvarCartao() {
-    let cartaoTemp = cartao
-    setCartao(cartao)
-    cartaoTemp = cartao
-    if (validaCartao(cartaoTemp)) {
-      return cartaoTemp.toUpperCase();
+    // let cartaoTemp = cartao
+    // setCartao(cartao)
+    // cartaoTemp = cartao
+    if (validaCartao(cartao)) {
+      return cartao.toUpperCase();
     }
   }
 
@@ -88,11 +89,11 @@ export default function LeituraCartao({ usuario }) {
           autoFocus
           onKeyUp={(e) => {
             if (e.key === "Enter") {
-              cadastrarUsuario(usuario)
+              cadastrarUsuario()
             }
           }} maxlength='8' />
         <div className='botoes'>
-          <Botao id='botao' disabled={bool} onClick={() => cadastrarUsuario(usuario)} >
+          <Botao id='botao' disabled={bool} onClick={() => cadastrarUsuario()} >
             Cadastrar
           </Botao>
           <Botao onClick={() => navegarPara('/')}>

@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import './PaginaMensagem.css';
 export default function PaginaMensagem() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const REDIRECT_URL = '/'
   const navigate = useNavigate()
   useEffect(() => {

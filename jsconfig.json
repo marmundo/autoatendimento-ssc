@@ -5,7 +5,8 @@
       "componentes": ["componentes"],
       "paginas": ["paginas"],
       "utils": ["utils"],
-      "css": ["css"]
+      "css": ["css"],
+      "common": ["common"]
     }
   }
 }
