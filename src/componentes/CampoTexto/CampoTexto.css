@@ -9,7 +9,7 @@
 }
 .campo-texto input {
   background-color: #fff;
-  box-shadow: 10px 10px 30px rgba(0, 0, 0.06);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   width: 100%;
   border: none;
   font-size: 24px;
