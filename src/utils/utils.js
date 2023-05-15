@@ -1,3 +1,5 @@
+import axios from "axios";
+
 async function post(url, dadosjson, nocors) {
   let headerOptions = {
     method: 'post',
@@ -23,5 +25,15 @@ async function post(url, dadosjson, nocors) {
   }
 }
 
-export { post };
+async function axiosPost(url, dadosjson) {
+  try {
+    let response = await axios.post(url, dadosjson)
+    return { status: response.status, data: response.data }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+export { post, axiosPost };
 
