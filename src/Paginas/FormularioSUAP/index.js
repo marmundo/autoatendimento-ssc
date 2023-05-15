@@ -4,7 +4,7 @@ import 'css/geral.css';
 import { useContext, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { validMatricula } from "utils/Regex";
-import { axiosPost } from "utils/utils";
+import { loginSUAP } from "utils/utils";
 import Botao from "../../componentes/Botao";
 import CampoTexto from "../../componentes/CampoTexto";
 import './FormularioSUAP.css';
@@ -27,23 +27,7 @@ const Formulario = (props) => {
   }
 
 
-  async function loginSUAP() {
-    let autenticacaoURL = "https://suap.ifrn.edu.br/api/v2/autenticacao/token/"
-    let dadosUsuario = { username: matricula, password: senha };
 
-    let response = await axiosPost(autenticacaoURL, dadosUsuario)
-
-    if (!response.status) {
-      return false;
-    } else {
-      console.log("Login realizado com sucesso")
-      let token = response.data.access
-      setToken(token)
-      setMatricula(matricula)
-      setSenha(senha)
-      return { 'status': true, 'token': token };
-    }
-  }
 
   async function getUserInformation(tempToken) {
     let headersList = {
@@ -72,7 +56,7 @@ const Formulario = (props) => {
 
     evento.preventDefault()
     setIsButtonDisable(true)
-    const resposta = await loginSUAP()
+    const resposta = await loginSUAP(matricula, senha)
 
     if (resposta.status) {
       await getUserInformation(resposta.token)

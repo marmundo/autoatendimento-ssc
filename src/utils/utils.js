@@ -34,6 +34,20 @@ async function axiosPost(url, dadosjson) {
   }
 }
 
+async function loginSUAP(matricula, senha) {
+  let autenticacaoURL = "https://suap.ifrn.edu.br/api/v2/autenticacao/token/"
+  let dadosUsuario = { username: matricula, password: senha };
 
-export { post, axiosPost };
+  let response = await axiosPost(autenticacaoURL, dadosUsuario)
+
+  if (!response.status) {
+    return false;
+  } else {
+    console.log("Login realizado com sucesso")
+    let token = response.data.access
+    return { 'status': true, 'token': token };
+  }
+}
+
+export { post, axiosPost, loginSUAP };
 
