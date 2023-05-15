@@ -4,11 +4,12 @@ import 'css/geral.css';
 import { useContext, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { validMatricula } from "utils/Regex";
+import { axiosPost } from "utils/utils";
 import Botao from "../../componentes/Botao";
 import CampoTexto from "../../componentes/CampoTexto";
 import './FormularioSUAP.css';
 
-const Formulario = ({ props }) => {
+const Formulario = (props) => {
   const { matricula, setMatricula, setToken, setNome, setEmail, setFoto } = useContext(UsuarioContext);
   const [senha, setSenha] = useState('');
   const [matriculaErr, setMatriculaErr] = useState(false)
@@ -28,24 +29,19 @@ const Formulario = ({ props }) => {
 
   async function loginSUAP() {
     let autenticacaoURL = "https://suap.ifrn.edu.br/api/v2/autenticacao/token/"
-    let dadosjson = JSON.stringify({ username: matricula, password: senha });
+    let dadosUsuario = { username: matricula, password: senha };
 
-    const response = await fetch(autenticacaoURL, {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: dadosjson,
-    })
-    if (!response.ok) {
+    let response = await axiosPost(autenticacaoURL, dadosUsuario)
+
+    if (!response.status) {
       return false;
     } else {
       console.log("Login realizado com sucesso")
-      const resposta = await response.json()
-      setToken(resposta.access)
+      let token = response.data.access
+      setToken(token)
       setMatricula(matricula)
       setSenha(senha)
-      return { 'status': true, 'token': resposta.access };
+      return { 'status': true, 'token': token };
     }
   }
 
