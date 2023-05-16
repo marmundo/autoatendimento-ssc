@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import { Outlet } from "react-router-dom";
 
 export const UsuarioContext = createContext()
 UsuarioContext.displayName = "Usuario"
@@ -18,7 +19,7 @@ export default function UsuarioProvider({ children }) {
         matricula, setMatricula, token, setToken, nome, setNome, email, setEmail, foto, setFoto, cartao, setCartao
       }}
     >
-      {children}
+      <Outlet />
     </UsuarioContext.Provider>
   )
 }
