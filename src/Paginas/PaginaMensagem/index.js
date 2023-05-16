@@ -1,5 +1,6 @@
 
 
+import 'css/geral.css';
 import { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import './PaginaMensagem.css';
@@ -10,11 +11,11 @@ export default function PaginaMensagem() {
   useEffect(() => {
     setTimeout(() => {
       navigate(REDIRECT_URL)
-    }, 3000)
+    }, 4000)
   }, [navigate])
   return (
-    <section className="container centro-tela">
-      <div className="centro-tela">
+    <section className="container">
+      <div className="form centro-tela">
         <h1>
           {searchParams.get('titulo')}
         </h1>
