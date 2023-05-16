@@ -26,7 +26,44 @@ export default function UsuarioProvider({ children }) {
 }
 
 export const useUsuarioContext = () => {
-  const { matricula, setMatricula, setToken, setNome, setEmail, setFoto } = useContext(UsuarioContext)
+  const { matricula, setMatricula, setToken, setNome, setEmail, setFoto, nome, token, cartao, setCartao } = useContext(UsuarioContext)
+  const url = 'https://10.230.0.46/api/v2/autoatendimento'
+
+
+
+  function montaPayload(cartao) {
+    let payload = {}
+    payload.nome = nome
+    payload.registro = matricula
+    payload.tag = cartao
+    payload.token = token
+    payload.vinculo = true
+    return payload
+  }
+
+
+  async function cadastrarUsuario() {
+    let payload = montaPayload(cartao.toUpperCase())
+    console.log(payload)
+    let response = await axiosPost(url, payload)
+
+    if (!response.status) {
+      const titulo = "ERRO!!!";
+      let msg = `/mensagem?titulo=${titulo}&subtitulo=${response.msg}`
+      return {
+        msg
+      }
+    } else {
+      const titulo = "Obrigado!!!"
+      const subtitulo = "Seu cartão foi cadastrado com sucesso!"
+      let msg = `/mensagem?titulo=${titulo}&subtitulo=${subtitulo}`
+      return {
+        msg: msg
+      }
+    }
+
+
+  }
 
   async function loginSUAP(matricula, senha) {
     let autenticacaoURL = "https://suap.ifrn.edu.br/api/v2/autenticacao/token/"
@@ -61,6 +98,6 @@ export const useUsuarioContext = () => {
     }
   }
   return {
-    matricula, setMatricula, setToken, setNome, setEmail, setFoto, getUserSUAPInformation, loginSUAP
+    nome, matricula, setMatricula, setToken, setNome, setEmail, setFoto, cartao, setCartao, getUserSUAPInformation, loginSUAP, cadastrarUsuario
   }
 }
