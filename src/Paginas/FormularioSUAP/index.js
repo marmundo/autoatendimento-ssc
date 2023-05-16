@@ -64,7 +64,7 @@ const Formulario = (props) => {
           <h1> {props.titulo}</h1>
           <h2> {props.subtitulo}</h2>
 
-          <CampoTexto max='99999999999999' label="Matrícula - SUAP" type="number" valor={matricula}
+          <CampoTexto label="Matrícula - SUAP" type="number" valor={matricula}
             aoAlterado={
               matricula => {
                 setMatricula(matricula); validarMatricula()
