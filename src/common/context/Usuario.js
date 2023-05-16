@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 
 export const UsuarioContext = createContext()
+UsuarioContext.displayName = "Usuario"
 
 export default function UsuarioProvider({ children }) {
   const [matricula, setMatricula] = useState('');
