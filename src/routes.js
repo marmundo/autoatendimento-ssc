@@ -14,7 +14,7 @@ export default function Router() {
 
       <Routes>
         <Route path="/" element={<UsuarioProvider />}>
-          <Route path="/" element={
+          <Route exact path="/" element={
             <Formulario
               titulo={'Cadastro de Acesso ao IFRN-SGA'}
               subtitulo={'Utilize sua matrícula e senha SUAP'}
