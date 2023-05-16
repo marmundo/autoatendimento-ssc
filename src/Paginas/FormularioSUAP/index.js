@@ -1,16 +1,15 @@
-import { UsuarioContext } from "common/context/Usuario";
+import { UsuarioContext, useUsuarioContext } from "common/context/Usuario";
 import CheckBox from "componentes/CheckBox";
 import 'css/geral.css';
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { validMatricula } from "utils/Regex";
-import { getUserSUAPInformation, loginSUAP } from "utils/utils";
 import Botao from "../../componentes/Botao";
 import CampoTexto from "../../componentes/CampoTexto";
 import './FormularioSUAP.css';
 
 const Formulario = (props) => {
-  const { matricula, setMatricula, setToken, setNome, setEmail, setFoto } = useContext(UsuarioContext);
+  const { matricula, setMatricula, setToken, setNome, setEmail, setFoto, getUserSUAPInformation, loginSUAP } = useUsuarioContext()
   const [senha, setSenha] = useState('');
   const [matriculaErr, setMatriculaErr] = useState(false)
   const [lgpd, setLgpd] = useState(false)
