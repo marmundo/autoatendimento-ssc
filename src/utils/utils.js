@@ -31,7 +31,13 @@ async function axiosPost(url, dadosjson) {
     return { status: response.status, data: response.data }
   } catch (error) {
     console.log(error);
+    let response = error.response
+    if (response) {
+      console.log(response.data); // => the response payload 
+      return { status: response.status, data: response.data }
+    }
   }
+
 }
 
 export { post, axiosPost };
