@@ -60,11 +60,11 @@ const Formulario = (props) => {
 
     <section className="container" onSubmit={aoProximo}>
       <UsuarioContext.Consumer>
-        {(usuario, setUsuario) => (<form>
+        {(usuario, setUsuario) => (<div className="form">
           <h1> {props.titulo}</h1>
           <h2> {props.subtitulo}</h2>
 
-          <CampoTexto maxlength="14" label="Matrícula - SUAP" type="number" valor={matricula}
+          <CampoTexto max='99999999999999' label="Matrícula - SUAP" type="number" valor={matricula}
             aoAlterado={
               matricula => {
                 setMatricula(matricula); validarMatricula()
@@ -81,11 +81,11 @@ const Formulario = (props) => {
           {isCapsLockOn && <p className="mensagem-erro">CapsLock está ativo</p>}
 
           <CheckBox label={lgpdLabel} checked={lgpd} onChange={() => setLgpd(!lgpd)} />
-          <Botao disabled={(matriculaErr || !lgpd) || isButtonDisable}>
+          <Botao onClick={(e) => aoProximo(e)} disabled={(matriculaErr || !lgpd) || isButtonDisable}>
             Próximo
           </Botao>
 
-        </form>)}
+        </div>)}
       </UsuarioContext.Consumer>
     </section>
   )

@@ -16,7 +16,7 @@ const CampoTexto = (props) => {
         autoFocus={props.autoFocus ? 'autoFocus' : ''}
         onKeyUp={props.onKeyUp}
         pattern={props.pattern}
-        maxLength={props.maxlength}
+        maxLength={props.maxLength}
       />
     </div>
   )
