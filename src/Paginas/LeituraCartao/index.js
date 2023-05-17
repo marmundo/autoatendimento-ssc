@@ -3,7 +3,7 @@ import Botao from "componentes/Botao";
 import CampoTexto from "componentes/CampoTexto";
 import 'css/geral.css';
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { validCartaoNFC } from "utils/Regex";
 import './LeituraCartao.css';
 export default function LeituraCartao() {
@@ -15,9 +15,7 @@ export default function LeituraCartao() {
   const { cartao, setCartao, cadastrarUsuario } = useUsuarioContext()
 
 
-  function navegarPara(path) {
-    navegar(path)
-  }
+
 
   function validaCartao() {
     if (!validCartaoNFC.test(cartao)) {
@@ -53,9 +51,11 @@ export default function LeituraCartao() {
         >
           Cadastrar
         </Botao>
-        <Botao onClick={() => navegarPara('/')}>
-          Cancelar
-        </Botao>
+        <Link to={'/'}>
+          <Botao >
+            Cancelar
+          </Botao>
+        </Link>
       </div>
 
       {cartaoErr && <div className="mensagem-erro"> <p>Seu cartão é inválido</p> <p>Insira novamente seu cartão!</p></div>}

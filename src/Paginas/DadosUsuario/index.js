@@ -2,7 +2,7 @@ import { UsuarioContext } from 'common/context/Usuario';
 import Botao from 'componentes/Botao';
 import 'css/geral.css';
 import { useCallback, useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './DadosUsuario.css';
 export default function DadosUsuario() {
   const { foto, matricula, nome, email } = useContext(UsuarioContext);
@@ -16,7 +16,8 @@ export default function DadosUsuario() {
   )
   const handleKeyUp = useCallback(
     (e) => {
-      if (e.key === "Enter") navegarPara('/leituraCartao')
+      if (e.key === "Enter")
+        navegarPara('/leituraCartao')
     },
     [navegarPara]
   );
@@ -49,12 +50,16 @@ export default function DadosUsuario() {
         </div>
       </div>
       <div className='botoes'>
-        <Botao onClick={() => navegarPara('/leituraCartao')}>
-          Confirmar
-        </Botao>
-        <Botao onClick={() => navegarPara('/')}>
-          Cancelar
-        </Botao>
+        <Link to={'/leituraCartao'}>
+          <Botao>
+            Confirmar
+          </Botao>
+        </Link>
+        <Link to={'/'}>
+          <Botao >
+            Cancelar
+          </Botao>
+        </Link>
       </div>
     </>
   )
