@@ -1,4 +1,3 @@
-import './NaoEncontrada.css';
 export default function NaoEncontrada() {
   return (
     <>
