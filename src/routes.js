@@ -1,9 +1,13 @@
 
-import UsuarioProvider from 'common/context/Usuario';
+
 import DadosUsuario from 'paginas/DadosUsuario';
 import Formulario from 'paginas/FormularioSUAP';
 import LeituraCartao from 'paginas/LeituraCartao';
+import NaoEncontrada from 'paginas/NaoEncontrada';
+import PaginaBase from 'paginas/PaginaBase';
 import PaginaMensagem from 'paginas/PaginaMensagem';
+
+
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 export default function Router() {
@@ -11,10 +15,9 @@ export default function Router() {
 
   return (
     <BrowserRouter>
-
       <Routes>
-        <Route path="/" element={<UsuarioProvider />}>
-          <Route exact path="/" element={
+        <Route path="/" element={<PaginaBase />}>
+          <Route index element={
             <Formulario
               titulo={'Cadastro de Acesso ao IFRN-SGA'}
               subtitulo={'Utilize sua matrícula e senha SUAP'}
@@ -22,6 +25,7 @@ export default function Router() {
           <Route path="confereDadosUsuario" element={<DadosUsuario />} />
           <Route path="leituraCartao" element={<LeituraCartao />} />
           <Route path="mensagem" element={<PaginaMensagem />} />
+          <Route path="*" element={<NaoEncontrada />} />
         </Route>
       </Routes>
     </BrowserRouter>

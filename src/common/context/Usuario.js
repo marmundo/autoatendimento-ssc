@@ -1,5 +1,4 @@
 import { createContext, useContext, useState } from "react";
-import { Outlet } from "react-router-dom";
 import { axiosPost } from "utils/utils";
 
 export const UsuarioContext = createContext()
@@ -20,7 +19,7 @@ export default function UsuarioProvider({ children }) {
         matricula, setMatricula, token, setToken, nome, setNome, email, setEmail, foto, setFoto, cartao, setCartao
       }}
     >
-      <Outlet />
+      {children}
     </UsuarioContext.Provider>
   )
 }
@@ -68,7 +67,6 @@ export const useUsuarioContext = () => {
   async function loginSUAP(matricula, senha) {
     let autenticacaoURL = "https://suap.ifrn.edu.br/api/v2/autenticacao/token/"
     let dadosUsuario = { username: matricula, password: senha };
-
     let response = await axiosPost(autenticacaoURL, dadosUsuario)
 
     if (!response.status) {

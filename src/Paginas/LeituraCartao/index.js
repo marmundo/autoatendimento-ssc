@@ -28,39 +28,37 @@ export default function LeituraCartao() {
     return true
   }
   return (
-    <section className="container">
-      <div className="form">
-        <CampoTexto
-          label={'Coloque seu Cartão no Leitor'}
-          valor={cartao}
-          aoAlterado={cartao => {
-            setCartao(cartao)
-          }}
-          autoFocus
-          onKeyUp={(e) => {
-            if (e.key === "Enter") {
-              cadastrarUsuario()
+    <>
+      <CampoTexto
+        label={'Coloque seu Cartão no Leitor'}
+        valor={cartao}
+        aoAlterado={cartao => {
+          setCartao(cartao)
+        }}
+        autoFocus
+        onKeyUp={(e) => {
+          if (e.key === "Enter") {
+            cadastrarUsuario()
+          }
+        }} maxLength='8' />
+      <div className='botoes'>
+        <Botao id='botao' disabled={isButtonDisable}
+          onClick={async () => {
+            if (validaCartao()) {
+              setIsButtonDisable(true);
+              let resposta = await cadastrarUsuario();
+              navegar(resposta.msg)
             }
-          }} maxLength='8' />
-        <div className='botoes'>
-          <Botao id='botao' disabled={isButtonDisable}
-            onClick={async () => {
-              if (validaCartao()) {
-                setIsButtonDisable(true);
-                let resposta = await cadastrarUsuario();
-                navegar(resposta.msg)
-              }
-            }}
-          >
-            Cadastrar
-          </Botao>
-          <Botao onClick={() => navegarPara('/')}>
-            Cancelar
-          </Botao>
-        </div>
-
-        {cartaoErr && <div className="mensagem-erro"> <p>Seu cartão é inválido</p> <p>Insira novamente seu cartão!</p></div>}
+          }}
+        >
+          Cadastrar
+        </Botao>
+        <Botao onClick={() => navegarPara('/')}>
+          Cancelar
+        </Botao>
       </div>
-    </section >
+
+      {cartaoErr && <div className="mensagem-erro"> <p>Seu cartão é inválido</p> <p>Insira novamente seu cartão!</p></div>}
+    </>
   )
 }

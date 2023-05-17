@@ -1,6 +1,5 @@
-import { UsuarioContext, useUsuarioContext } from "common/context/Usuario";
+import { useUsuarioContext } from "common/context/Usuario";
 import CheckBox from "componentes/CheckBox";
-import 'css/geral.css';
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { validMatricula } from "utils/Regex";
@@ -57,37 +56,31 @@ const Formulario = (props) => {
     !validMatricula.test(matricula) ? setMatriculaErr(true) : setMatriculaErr(false)
   }
   return (
+    <>
+      <h1> {props.titulo}</h1>
+      <h2> {props.subtitulo}</h2>
 
-    <section className="container" onSubmit={aoProximo}>
-      <UsuarioContext.Consumer>
-        {(usuario, setUsuario) => (<div className="form">
-          <h1> {props.titulo}</h1>
-          <h2> {props.subtitulo}</h2>
+      <CampoTexto label="Matrícula - SUAP" type="number" valor={matricula}
+        aoAlterado={
+          matricula => {
+            setMatricula(matricula); validarMatricula()
+          }}
+        autoFocus required />
+      {matriculaErr && <p className="mensagem-erro">Sua matrícula é inválida</p>}
+      <CampoTexto type="password" label="Senha - SUAP" valor={senha} onKeyUp={(e) => {
+        if (e.key === "Enter" && (!matriculaErr && lgpd)) {
+          aoProximo(e);
+        }
+        checkCapsLock(e)
+      }} aoAlterado={senha => { setSenha(senha) }} required />
+      {/* Avisa ao usuario quando o caps lock está ativo */}
+      {isCapsLockOn && <p className="mensagem-erro">CapsLock está ativo</p>}
 
-          <CampoTexto label="Matrícula - SUAP" type="number" valor={matricula}
-            aoAlterado={
-              matricula => {
-                setMatricula(matricula); validarMatricula()
-              }}
-            autoFocus required />
-          {matriculaErr && <p className="mensagem-erro">Sua matrícula é inválida</p>}
-          <CampoTexto type="password" label="Senha - SUAP" valor={senha} onKeyUp={(e) => {
-            if (e.key === "Enter" && (!matriculaErr && lgpd)) {
-              aoProximo(e);
-            }
-            checkCapsLock(e)
-          }} aoAlterado={senha => { setSenha(senha) }} required />
-          {/* Avisa ao usuario quando o caps lock está ativo */}
-          {isCapsLockOn && <p className="mensagem-erro">CapsLock está ativo</p>}
-
-          <CheckBox label={lgpdLabel} checked={lgpd} onChange={() => setLgpd(!lgpd)} />
-          <Botao onClick={(e) => aoProximo(e)} disabled={(matriculaErr || !lgpd) || isButtonDisable}>
-            Próximo
-          </Botao>
-
-        </div>)}
-      </UsuarioContext.Consumer>
-    </section>
+      <CheckBox label={lgpdLabel} checked={lgpd} onChange={() => setLgpd(!lgpd)} />
+      <Botao onClick={(e) => aoProximo(e)} disabled={(matriculaErr || !lgpd) || isButtonDisable}>
+        Próximo
+      </Botao>
+    </>
   )
 }
 export default Formulario
