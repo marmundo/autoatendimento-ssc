@@ -5,9 +5,10 @@ const CampoTexto = (props) => {
     props.aoAlterado(evento.target.value)
   }
   return (
-    <div className="campo-texto">
+    <div className="campo-texto" >
       <label>{props.label}</label>
       <input
+        id={props.id}
         type={props.type}
         value={props.valor}
         onChange={aoDigitado}

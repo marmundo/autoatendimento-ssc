@@ -6,6 +6,7 @@ import LeituraCartao from 'paginas/LeituraCartao';
 import NaoEncontrada from 'paginas/NaoEncontrada';
 import PaginaBase from 'paginas/PaginaBase';
 import PaginaMensagem from 'paginas/PaginaMensagem';
+import VerificaNFC from 'paginas/VerificaNFC';
 
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -25,6 +26,7 @@ export default function Router() {
           <Route path="confereDadosUsuario" element={<DadosUsuario />} />
           <Route path="leituraCartao" element={<LeituraCartao />} />
           <Route path="mensagem" element={<PaginaMensagem />} />
+          <Route path="verifica-nfc" element={<VerificaNFC />} />
           <Route path="*" element={<NaoEncontrada />} />
         </Route>
       </Routes>
