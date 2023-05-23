@@ -1,4 +1,5 @@
 import { useUsuarioContext } from "common/context/Usuario";
+import Cabecalho from "componentes/Cabecalho";
 import CheckBox from "componentes/CheckBox";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
@@ -57,8 +58,8 @@ const Formulario = (props) => {
   }
   return (
     <>
-      <h1> {props.titulo}</h1>
-      <h2> {props.subtitulo}</h2>
+
+      <Cabecalho titulo={props.titulo} subtitulo={props.subtitulo} />
 
       <CampoTexto label="Matrícula - SUAP" type="number" valor={matricula}
         aoAlterado={
