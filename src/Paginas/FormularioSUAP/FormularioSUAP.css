@@ -1,8 +1,0 @@
-#verifica-nfc {
-  display: flex;
-  justify-content: flex-end;
-  margin-left: 5%;
-}
-#verifica-nfc .botao {
-  font-size: medium;
-}

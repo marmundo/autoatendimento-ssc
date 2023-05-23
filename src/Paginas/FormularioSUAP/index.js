@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import { validMatricula } from "utils/Regex";
 import Botao from "../../componentes/Botao";
 import CampoTexto from "../../componentes/CampoTexto";
-import './FormularioSUAP.css';
 
 const Formulario = (props) => {
   const { matricula, setMatricula, setToken, setNome, setEmail, setFoto, getUserSUAPInformation, loginSUAP } = useUsuarioContext()
