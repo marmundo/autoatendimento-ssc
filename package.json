@@ -19,7 +19,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "scp -r /Users/marcelo/Documents/desenvolvimento/autoatendimento-ssc/build ssc@10.230.0.46:/home/ssc/www/"
+    "deploy": "scp -r /Users/marcelo/Documents/desenvolvimento/autoatendimento-ssc/build/ ssc@10.230.0.46:/home/ssc/www/build-new"
   },
   "eslintConfig": {
     "extends": [
