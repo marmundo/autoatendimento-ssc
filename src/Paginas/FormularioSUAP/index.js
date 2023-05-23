@@ -30,7 +30,6 @@ const Formulario = (props) => {
     evento.preventDefault()
     setIsButtonDisable(true)
     const resposta = await loginSUAP(matricula, senha)
-
     if (resposta.status) {
       let usuario = await getUserSUAPInformation(resposta.token)
       setToken(resposta.token)

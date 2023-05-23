@@ -71,8 +71,6 @@ export const useUsuarioContext = () => {
         msg: msg
       }
     }
-
-
   }
 
   async function loginSUAP(matricula, senha) {
@@ -80,14 +78,14 @@ export const useUsuarioContext = () => {
     let dadosUsuario = { username: matricula, password: senha };
     let response = await axiosPost(autenticacaoURL, dadosUsuario)
 
-    if (!response.status) {
-      return false;
-    } else {
-      console.log("Login realizado com sucesso")
-      let token = response.data.access
-      return { 'status': true, 'token': token };
-    }
+    if (response.status !== 200)
+      return { 'status': false }
+
+    console.log("Login realizado com sucesso")
+    let token = response.data.access
+    return { 'status': true, 'token': token };
   }
+
   async function getUserSUAPInformation(tempToken) {
     let headersList = {
       "Accept": "*/*",
