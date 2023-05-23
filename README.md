@@ -1,4 +1,6 @@
 # Auto Atendimento SGA Sem Chaves
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
 
 :star: Star us on GitHub — it motivates us a lot!
 
@@ -67,6 +69,10 @@ npm run deploy
 Executes a custom deploy script which copies build folder to a remote server using scp.
 
 ## ScreenShot
+
+![Tela Inicial](https://github.com/marmundo/autoatendimento-ssc/assets/854584/f0da1c5c-e3af-412f-b7f2-63fe2e09aa4a)
+
+
 
 ## Links
 
