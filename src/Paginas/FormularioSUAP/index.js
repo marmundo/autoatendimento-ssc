@@ -1,7 +1,7 @@
 import { useUsuarioContext } from "common/context/Usuario";
 import Cabecalho from "componentes/Cabecalho";
 import CheckBox from "componentes/CheckBox";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { validMatricula } from "utils/Regex";
 import Botao from "../../componentes/Botao";
@@ -9,6 +9,7 @@ import CampoTexto from "../../componentes/CampoTexto";
 
 const Formulario = (props) => {
   const { matricula, setMatricula, setToken, setNome, setEmail, setFoto, getUserSUAPInformation, loginSUAP } = useUsuarioContext()
+
   const [senha, setSenha] = useState('');
   const [matriculaErr, setMatriculaErr] = useState(false)
   const [lgpd, setLgpd] = useState(false)
@@ -19,7 +20,10 @@ const Formulario = (props) => {
 
   const lgpdLabel = "Eu concordo que minhas informações aqui apresentadas sejam armazenadas por esse sistema de acordo com a legislação brasileira."
 
-
+  useEffect(() => {
+    setMatricula('')
+    setSenha('')
+  }, [setMatricula, setSenha])
 
   async function aoProximo(evento) {
 
@@ -57,7 +61,6 @@ const Formulario = (props) => {
   }
   return (
     <>
-
       <Cabecalho titulo={props.titulo} subtitulo={props.subtitulo} />
 
       <CampoTexto label="Matrícula - SUAP" type="number" valor={matricula}

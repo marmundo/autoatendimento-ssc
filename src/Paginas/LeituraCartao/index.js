@@ -2,7 +2,7 @@ import { useUsuarioContext } from "common/context/Usuario";
 import Botao from "componentes/Botao";
 import CampoTexto from "componentes/CampoTexto";
 import 'css/geral.css';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { validCartaoNFC } from "utils/Regex";
 import './LeituraCartao.css';
@@ -14,7 +14,8 @@ export default function LeituraCartao() {
 
   const { cartao, setCartao, cadastrarUsuario } = useUsuarioContext()
 
-
+  useEffect(() =>
+    setCartao(''), [setCartao])
 
 
   function validaCartao() {

@@ -1,10 +1,20 @@
 import { createContext, useContext, useState } from "react";
 import { axiosPost } from "utils/utils";
 
-export const UsuarioContext = createContext()
+const initialState = {
+  matricula: '',
+  token: '',
+  nome: '',
+  email: '',
+  foto: '',
+  cartao: '',
+}
+
+export const UsuarioContext = createContext(initialState)
 UsuarioContext.displayName = "Usuario"
 
 export default function UsuarioProvider({ children }) {
+
   const [matricula, setMatricula] = useState('');
   const [token, setToken] = useState('');
   const [nome, setNome] = useState('');
@@ -25,6 +35,7 @@ export default function UsuarioProvider({ children }) {
 }
 
 export const useUsuarioContext = () => {
+
   const { matricula, setMatricula, setToken, setNome, setEmail, setFoto, nome, token, cartao, setCartao } = useContext(UsuarioContext)
   const url = 'https://10.230.0.46/api/v2/autoatendimento'
 
